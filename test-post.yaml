@@ -1,0 +1,27 @@
+config:
+  target: http://localhost:8000
+  phases:
+    - duration: 30
+      arrivalRate: 1
+      rampTo: 10
+      name: 'Warm up'
+    - duration: 30
+      arrivalRate: 10
+      rampTo: 100
+      name: 'Moderate stress'
+    - duration: 30
+      arrivalRate: 100
+      rampTo: 300
+      name: 'Significant stress'
+    - duration: 30
+      arrivalRate: 300
+      rampTo: 600
+      name: 'Max stress'
+scenarios:
+  - flow:
+    - post:
+        url: "/books/30/reviews"
+        json:
+          user_id: 11
+          review: "Sample review proxy"
+          rating: 4

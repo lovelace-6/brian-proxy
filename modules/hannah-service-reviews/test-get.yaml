@@ -1,0 +1,22 @@
+config:
+  target: http://localhost:3003
+  phases:
+    - duration: 30
+      arrivalRate: 1
+      rampTo: 10
+      name: 'Warm up'
+    - duration: 60
+      arrivalRate: 10
+      rampTo: 100
+      name: 'Moderate stress'
+    - duration: 30
+      arrivalRate: 100
+      rampTo: 1000
+      name: 'Significant stress'
+scenarios:
+  - flow:
+    - get:
+        url: "/books/3/"
+
+
+
