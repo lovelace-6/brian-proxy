@@ -7,7 +7,7 @@ import RatingDetails from './components/RatingDetails.jsx';
 import Filter from './components/Filter.jsx'
 import AddReview from './components/AddReview.jsx'
 import style from './sample.less';
-
+// hi
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -24,16 +24,18 @@ class App extends React.Component {
       two: 0,
       one: 0,
       all: 0,
-      averageRating: 0
+      averageRating: 0,
+      usersReceived: false
     };
     this.handleReviews = this.handleReviews.bind(this);
     this.updateReviews = this.updateReviews.bind(this);
     this.sortByRating = this.sortByRating.bind(this);
   }
 
+
   async componentDidMount() {
     await this.getAllReviews();
-    await this.getAllUsers();
+    await this.getUsersForReviews();
     await this.sortByRating();
     await this.average();
   }
@@ -49,11 +51,22 @@ class App extends React.Component {
     await this.setState({ ratings: allRatings })
   }
 
-  getAllUsers() {
-    $.get(`/books/${this.state.id}/reviews/users`, (data) => {
-      this.setState({
-        users: data
-      });
+  // getAllUsers() {
+  //   $.get(`/books/${this.state.id}/reviews/users`, (data) => {
+  //     this.setState({
+  //       users: data
+  //     });
+  //   });
+  // }
+
+    getUsersForReviews() {
+    this.state.reviews.forEach(review => {
+
+       $.get(`/books/${review.user_id}/reviews/users`, (data) => {
+        this.state.users.push(data);
+        this.setState({ users: this.state.users })
+      })
+
     });
   }
 
@@ -117,6 +130,7 @@ class App extends React.Component {
 
   render() {
     const { reviews, ratings, ratedReviews, users, rating, averageRating, id } = this.state;
+
     return (
       <div className={style.container}>
         <RatingDetails

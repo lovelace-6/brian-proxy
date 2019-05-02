@@ -19,7 +19,8 @@ const EachReview = (props) => {
   return (
     <div>
       {users.map((user, index) => {
-        if (user.id === userId) {
+        console.log(user.user_id);
+        if (user.user_id === userId) {
           return (
             <div key={index}>
               <a href="#" className={style.image}>

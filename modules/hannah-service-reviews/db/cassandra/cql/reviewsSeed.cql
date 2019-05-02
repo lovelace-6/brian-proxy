@@ -1,0 +1,1 @@
+COPY sdc.reviews (id, book_id, user_id, date, review, rating) FROM '/Users/briankwon/Desktop/hr-immersive/SDC/sdc-brian/db/cassandra/csv-generators/csv/reviews.csv' WITH header=true AND delimiter=',';
