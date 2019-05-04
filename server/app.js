@@ -34,4 +34,9 @@ app.use(
   proxy({ target: 'http://ec2-13-59-83-138.us-east-2.compute.amazonaws.com:9000', changeOrigin: true }),
 );
 
+// LOADER IO
+app.get('/loaderio-fbeab14fae82bdaa3cfc2d1dbad83c59', (req, res) => {
+  res.send('loaderio-fbeab14fae82bdaa3cfc2d1dbad83c59');
+});
+
 module.exports = app;
